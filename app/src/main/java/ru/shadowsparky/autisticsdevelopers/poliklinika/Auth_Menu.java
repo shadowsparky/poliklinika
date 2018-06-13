@@ -19,6 +19,7 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_auth__menu);
         _login = findViewById(R.id.LoginBox);
         _password = findViewById(R.id.PasswordBox);
+        getSupportActionBar().setTitle("Авторизация");
 //        _btn.setOnClickListener(this);
     }
 
@@ -35,9 +36,9 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
         try {
             res = thread.get();
             if (SA.HandleResult((SQL_Engine) res.get(0))){
-                //Intent i = new Intent(this, userMenu.class);
-                //startActivity(i);
-                //finish();
+                Intent i = new Intent(this, UserMenu.class);
+                startActivity(i);
+                finish();
             }
         } catch (Exception e) {
             e.printStackTrace();
