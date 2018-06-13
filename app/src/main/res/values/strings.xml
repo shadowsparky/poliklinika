@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Моя Поликлиника</string>
+
+    <!-- hints -->
+    <string name="Auth_LoginBoxHint">Введите логин</string>
+    <string name="Auth_PasswordBoxHint">Введите пароль</string>
+</resources>
