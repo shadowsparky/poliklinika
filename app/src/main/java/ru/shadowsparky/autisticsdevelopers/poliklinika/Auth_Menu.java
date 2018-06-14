@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 
 import java.util.ArrayList;
 
@@ -20,21 +22,21 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
         _login = findViewById(R.id.LoginBox);
         _password = findViewById(R.id.PasswordBox);
         getSupportActionBar().setTitle("Авторизация");
-//        _btn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        ArrayList<SQL_Engine> res = null;
-        SQL_Auth result = null;
-        String[] bindValues = {"Key", "Login", "Password"};
-        String[] values = {"EnableExecute", _login.getText().toString(), _password.getText().toString()};
-        SQL_Auth SA = new SQL_Auth(bindValues, values, "https://autisticapi.shadowsparky.ru/auth.php");
-        SA.set_context(this);
-        SQLThread thread = new SQLThread();
-        thread.execute(SA);
         try {
+            ArrayList<SQL_Engine> res = null;
+            SQL_Auth result = null;
+            String[] bindValues = {"Key", "Login", "Password"};
+            String[] values = {"EnableExecute", _login.getText().toString(), _password.getText().toString()};
+            SQL_Auth SA = new SQL_Auth(bindValues, values, "https://autisticapi.shadowsparky.ru/auth.php");
+            SA.set_context(this);
+            SQLThread thread = new SQLThread();
+            thread.execute(SA);
             res = thread.get();
+            if (res == null) { raiseAuthError(); return; }
             if (SA.HandleResult((SQL_Engine) res.get(0))){
                 Intent i = new Intent(this, UserMenu.class);
                 startActivity(i);
@@ -42,6 +44,11 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
             }
         } catch (Exception e) {
             e.printStackTrace();
+            raiseAuthError();
         }
+    }
+
+    private void raiseAuthError() {
+        Toast.makeText(this, "При соединении с сервером произошла ошибка. Проверьте свое подключение к интернету", Toast.LENGTH_LONG).show();
     }
 }
