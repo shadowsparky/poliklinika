@@ -75,7 +75,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
             year_x = year;
             month_x = month;
             day_x = dayOfMonth;
-            tv.setText(year_x + "."+ month_x + "." + day_x);
+            tv.setText(year_x + "."+ month_x + 1 + "." + day_x);
         }
     };
 }
