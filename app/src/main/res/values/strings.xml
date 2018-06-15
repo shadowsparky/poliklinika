@@ -4,4 +4,6 @@
     <!-- hints -->
     <string name="Auth_LoginBoxHint">Введите логин</string>
     <string name="Auth_PasswordBoxHint">Введите пароль</string>
+    <!-- ToastErrors -->
+    <string name="DoctorsSelectFail">К сожалению, на выбранную Вами дату нет доступных врачей</string>
 </resources>
