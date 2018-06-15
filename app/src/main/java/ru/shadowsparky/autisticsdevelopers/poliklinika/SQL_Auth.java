@@ -9,9 +9,10 @@ import okhttp3.Response;
 public class SQL_Auth extends SQL_Engine implements ISQL {
     private String result;
 
-    SQL_Auth(String[] bindValues, String[] Values, String url) {
-        super(bindValues, Values, url);
+    public SQL_Auth(String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
     }
+
     @Override
     public SQL_Engine parseJson(JSONObject object) {
         SQL_Auth SA = new SQL_Auth(null, null, null);
@@ -42,5 +43,10 @@ public class SQL_Auth extends SQL_Engine implements ISQL {
     @Override
     public Response Post() {
         return super.Post();
+    }
+
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
     }
 }

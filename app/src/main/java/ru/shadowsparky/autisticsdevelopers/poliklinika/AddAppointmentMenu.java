@@ -1,6 +1,7 @@
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,8 +20,15 @@ public class AddAppointmentMenu extends AppCompatActivity {
     private int selectedSpecID;
     private int year_x, day_x, month_x;
     private static final int DIALOG_ID = 0;
+    private Spinner spinner;
+    private Spinner DocSpinner;
+    private String choosedDate;
+    private String currentDocNumber;
     TextView tv;
     DatePickerDialog DPD;
+    String[] docNumbers;
+    String[] docsData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +38,11 @@ public class AddAppointmentMenu extends AppCompatActivity {
         year_x = cal.get(Calendar.YEAR);
         month_x = cal.get(Calendar.MONTH);
         day_x = cal.get(Calendar.DAY_OF_MONTH);
-        SQL_AvailableSpec SA = new SQL_AvailableSpec(null, null, null);
-        SA.set_context(this);
-        String [] qryRes = SA.QueryResult();
-        if (qryRes == null) return;
-        FillAvailableDocs(SA.QueryResult());
+//        SQL_AvailableSpec SA = new SQL_AvailableSpec(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailablespec.php");
+//        SA.set_context(this);
+//        String [] qryRes = SA.QueryRes();
+//        if (qryRes == null) return;
+//        FillAvailableSpec(qryRes);
         tv = findViewById(R.id.dateView);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,15 +50,13 @@ public class AddAppointmentMenu extends AppCompatActivity {
                 createDialog();
             }
         });
-
     }
 
-    private void FillAvailableDocs(String [] data){
+    private void FillAvailableSpec(String [] data){
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
-        spinner.setPrompt("Выберите специальность");
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -73,9 +79,46 @@ public class AddAppointmentMenu extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             year_x = year;
-            month_x = month;
+            month_x = month + 1;
             day_x = dayOfMonth;
-            tv.setText(year_x + "."+ month_x + 1 + "." + day_x);
+            choosedDate = day_x+ "."+ month_x + "."+year_x;
+            tv.setText(choosedDate);
+            setDoctors();
         }
     };
+
+    private void setDoctors() {
+        String[] bindValues = {"Key", "Position", "Date"};
+        String[] Values = {"EnableExecute", spinner.getSelectedItem().toString(), choosedDate};
+        SQL_AvailableDoctors SA = new SQL_AvailableDoctors(bindValues, Values, null);
+        ArrayList<SQL_Engine> res = SA.CatchResult();
+        this.docNumbers = new String[res.size()];
+        this.docsData = new String[res.size()];
+        for (int i = 0; i < res.size(); i++){
+            if (((SQL_AvailableDoctors)res.get(i)).get_Result() == null) {
+                docsData[i] =  (((SQL_AvailableDoctors)res.get(i)).getFirst_Name() + " " + ((SQL_AvailableDoctors)res.get(i)).getLast_Name() + " " + ((SQL_AvailableDoctors)res.get(i)).getPathronymic());
+                docNumbers[i] = ((SQL_AvailableDoctors)res.get(i)).getDoctor_Number();
+            }
+        }
+        fillAvaliableDocs();
+    }
+
+    private void fillAvaliableDocs(){
+        DocSpinner = findViewById(R.id.DoctorsSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, docsData);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        DocSpinner = findViewById(R.id.DoctorsSpinner);
+        DocSpinner.setAdapter(adapter);
+        DocSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AddAppointmentMenu.this, docNumbers[position] + " " + DocSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 }

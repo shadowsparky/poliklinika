@@ -33,11 +33,9 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
             String[] values = {"EnableExecute", _login.getText().toString(), _password.getText().toString()};
             SQL_Auth SA = new SQL_Auth(bindValues, values, "https://autisticapi.shadowsparky.ru/auth.php");
             SA.set_context(this);
-            SQLThread thread = new SQLThread();
-            thread.execute(SA);
-            res = thread.get();
+            res = SA.CatchResult();
             if (res == null) { raiseAuthError(); return; }
-            if (SA.HandleResult((SQL_Engine) res.get(0))){
+            if (SA.HandleResult((SQL_Auth) res.get(0))){
                 Intent i = new Intent(this, UserMenu.class);
                 startActivity(i);
                 finish();

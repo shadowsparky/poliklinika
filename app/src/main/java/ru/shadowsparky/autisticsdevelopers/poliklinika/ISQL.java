@@ -9,4 +9,5 @@ public interface ISQL {
     JSONArray parseJSON(String response);
     ArrayList<SQL_Engine> fromJson(final JSONArray array);
     boolean HandleResult(SQL_Engine se);
+    ArrayList<SQL_Engine> CatchResult();
 }

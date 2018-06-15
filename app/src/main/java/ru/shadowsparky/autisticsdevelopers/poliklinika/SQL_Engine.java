@@ -1,6 +1,8 @@
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
 import android.content.Context;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,13 +20,14 @@ public abstract class SQL_Engine implements ISQL {
     private String url;
     private Context _context;
 
+    public SQL_Engine(String[] bindValues, String[] values, String url) {
+        this.bindValues = bindValues;
+        this.Values = values;
+        this.url = url;
+    }
+
     public void set_context(Context _context) {
         this._context = _context;
-    }
-    SQL_Engine(String[] bindValues, String[] Values, String url){
-        this.bindValues = bindValues;
-        this.Values = Values;
-        this.url = url;
     }
     @Override
     public Response Post(){
@@ -58,6 +61,20 @@ public abstract class SQL_Engine implements ISQL {
             e.printStackTrace();
         }
         return jArr;
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult(){
+        ArrayList<SQL_Engine> res = null;
+        try{
+            this.set_context(_context);
+            SQLThread thread = new SQLThread();
+            thread.execute(this);
+            res = thread.get();
+            if (res == null) { return null; }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     @Override
     public ArrayList<SQL_Engine> fromJson(final JSONArray array) {
