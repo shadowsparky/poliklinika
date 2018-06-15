@@ -1,10 +1,12 @@
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
+import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -38,11 +40,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
         year_x = cal.get(Calendar.YEAR);
         month_x = cal.get(Calendar.MONTH);
         day_x = cal.get(Calendar.DAY_OF_MONTH);
-//        SQL_AvailableSpec SA = new SQL_AvailableSpec(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailablespec.php");
-//        SA.set_context(this);
-//        String [] qryRes = SA.QueryRes();
-//        if (qryRes == null) return;
-//        FillAvailableSpec(qryRes);
+        FillAvailableSpec(catchSpec());
         tv = findViewById(R.id.dateView);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,9 +49,24 @@ public class AddAppointmentMenu extends AppCompatActivity {
             }
         });
     }
+    private String[] catchSpec(){
+        String[] result = null;
+        String [] bindValues = {"Key"};
+        String [] Values = {"EnableExecute"};
+        SQL_AvailableSpec SA = new SQL_AvailableSpec(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailablespec.php");
+        SA.set_context(this);
+        ArrayList<SQL_Engine> res = SA.CatchResult();
+        result = new String[res.size() + 1];
+        result[0] = "Выберите специальность";
+        for (int i = 0; i < res.size(); i++) {
+            result[i + 1] = ((SQL_AvailableSpec)res.get(i)).getResult();
+        }
+        return result;
+    }
 
     private void FillAvailableSpec(String [] data){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
+        customSpinner cs = new customSpinner();
+        ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
@@ -90,7 +103,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
     private void setDoctors() {
         String[] bindValues = {"Key", "Position", "Date"};
         String[] Values = {"EnableExecute", spinner.getSelectedItem().toString(), choosedDate};
-        SQL_AvailableDoctors SA = new SQL_AvailableDoctors(bindValues, Values, null);
+        SQL_AvailableDoctors SA = new SQL_AvailableDoctors(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailabledocs.php");
         ArrayList<SQL_Engine> res = SA.CatchResult();
         this.docNumbers = new String[res.size()];
         this.docsData = new String[res.size()];

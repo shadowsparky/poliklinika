@@ -95,3 +95,158 @@ public abstract class SQL_Engine implements ISQL {
     public abstract SQL_Engine parseJson(final JSONObject object);
     public abstract boolean HandleResult(SQL_Engine se);
 }
+
+class SQL_Auth extends SQL_Engine implements ISQL {
+    private String result;
+
+    public SQL_Auth(String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_Auth SA = new SQL_Auth(null, null, null);
+        try {
+            SA.result = object.getString("Result");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        SQL_Auth result = (SQL_Auth) se;
+        switch(result.result){
+            case "Not Exists":
+                Toast.makeText(super.get_context(), "Неправильный логин или пароль", Toast.LENGTH_SHORT).show();
+                break;
+            case "Exists":
+                Toast.makeText(super.get_context(), "Авторизация прошла успешно!", Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
+    }
+}
+
+class SQL_AvailableDoctors extends SQL_Engine implements ISQL {
+    private String Doctor_Number;
+    private String First_Name;
+    private String Last_Name;
+    private String Pathronymic;
+    private String result;
+    private Context _context;
+    private String[] bindValues;
+    private String[] values;
+
+    public String getDoctor_Number() {
+        return Doctor_Number;
+    }
+
+    public String getFirst_Name() {
+        return First_Name;
+    }
+
+    public String getLast_Name() {
+        return Last_Name;
+    }
+
+    public String getPathronymic(){
+        return Pathronymic;
+    }
+
+    @Override
+    public void set_context(Context _context) {
+        this._context = _context;
+    }
+
+    public String get_Result(){return result;}
+    SQL_AvailableDoctors(String[] bindValues, String[] Values, String url) {
+        super(bindValues, Values, url);
+    }
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_AvailableDoctors SA = new SQL_AvailableDoctors(null, null, null);
+        try {
+            SA.Doctor_Number = object.getString("Doctor_Number");
+            SA.First_Name = object.getString("Doctor_FirstName");
+            SA.Last_Name = object.getString("Doctor_LastName");
+            SA.Pathronymic = object.getString("Doctor_Pathronymic");
+            SA.result = object.getString("Result");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
+    }
+}
+
+class SQL_AvailableSpec extends SQL_Engine implements ISQL {
+    private String result;
+    private Context _context;
+
+    public SQL_AvailableSpec(String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+
+    @Override
+    public void set_context(Context _context) {
+        this._context = _context;
+    }
+
+    public String getResult(){return result;}
+
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_AvailableSpec SA = new SQL_AvailableSpec(null, null, null);
+        try {
+            SA.result = object.getString("Position");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
+    }
+}
