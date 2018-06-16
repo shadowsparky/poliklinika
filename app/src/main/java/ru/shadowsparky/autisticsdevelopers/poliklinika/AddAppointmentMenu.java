@@ -223,4 +223,86 @@ public class AddAppointmentMenu extends AppCompatActivity {
             TimeSpinner.setAdapter(adapter);
         }
     }
+    public void AddAppointmentButtonClick(View view) {
+        if (SpinnersChecker()) {
+            String ExecuteResult = getAddAppointmentResult();
+            if (!ExecuteResult.equals("RaiseError")) {
+                Toast.makeText(this, "Запись на приём успешно добавлена", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    }
+    private String getAddAppointmentResult(){
+        String[] bindValues = {"Key", "Login", "Doctor_Number", "Date", "Time"};
+        String result = null;
+        String[] Values = {"EnableExecute", Auth_Menu.getLogin(), currentDocNumber, choosedDate, TimeSpinner.getSelectedItem().toString()};
+        SQL_AddAppointment SA = new SQL_AddAppointment(bindValues, Values, "https://autisticapi.shadowsparky.ru/addAppointment.php");
+        ArrayList<SQL_Engine> res = SA.CatchResult();
+        if (res != null) {
+            result = ((SQL_AddAppointment) res.get(0)).getResult();
+            if (result.equals("Регистрирование на прием невозможно. Попробуйте выбрать другое время") ||
+                    (result.equals("Во время регистрации на прием произошла техническая ошибка. Обратитесь к системному администратору")) ||
+                        (result.equals("На эту дату приема больше нет. Пожалуйста, выберите другую дату"))){
+                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                return "RaiseError";
+            }
+        } else {
+            Toast.makeText(this, "Во время добавления записи произошла критическая ошибка. Проверьте ваше интернет соединение", Toast.LENGTH_SHORT).show();
+            return "RaiseError";
+        }
+        return result;
+    }
+
+    private Boolean checkSpecSpinner(){
+        if (spinner != null) {
+            if ((spinner.getSelectedItem().toString().equals("Выберите специальность")) || (spinner.getSelectedItem().toString().equals(""))) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+    private Boolean checkDateSpinner(){
+        if (DateSpinner != null) {
+            if ((DateSpinner.getSelectedItem().toString().equals("Выберите дату")) || (DateSpinner.getSelectedItem().toString().equals("Выберите дату"))) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+    private Boolean checkDocSpinner(){
+        if (DocSpinner != null) {
+            if ((DocSpinner.getSelectedItem().toString().equals("Выберите врача")) || (DocSpinner.getSelectedItem().toString().equals("")) || (DocSpinner.getSelectedItem().toString().equals("Нет доступных врачей"))) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+    private Boolean checkTimeSpinner(){
+        if (TimeSpinner != null) {
+            if ((TimeSpinner.getSelectedItem().toString().equals("")) || (TimeSpinner.getSelectedItem().toString().equals("Выберите время"))) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean SpinnersChecker() {
+        if (checkSpecSpinner()){
+            if (checkDateSpinner()) {
+                if (checkDocSpinner()){
+                    if (checkTimeSpinner()){
+                        return true;
+                    } else {Toast.makeText(this, "Пожалуйста, выберите информацию о необходимом времени", Toast.LENGTH_SHORT).show(); return false;}
+                } else { Toast.makeText(this, "Пожалуйста, выберите информацию о необходимом враче", Toast.LENGTH_SHORT).show(); return false;}
+            } else { Toast.makeText(this, "Пожалуйста, выберите информацию о необходимой дате", Toast.LENGTH_SHORT).show(); return false;}
+        } else { Toast.makeText(this, "Пожалуйста, выберите информацию о необходимой специализации", Toast.LENGTH_SHORT).show(); return false;}
+    }
 }

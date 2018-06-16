@@ -15,8 +15,9 @@ SQLThread extends AsyncTask<SQL_Engine, Integer, ArrayList<SQL_Engine>> {
     @Override
     protected ArrayList<SQL_Engine> doInBackground(SQL_Engine... objects) {
         String stringResponse = null;
-        if (objects[0].Post() != null) {
-            Response response = objects[0].Post();
+        Response response = objects[0].Post();
+        if (response != null) {
+//            Response response = objects[0].Post();
             try {
                 stringResponse = response.body().string();
                 if (stringResponse == null) return null;

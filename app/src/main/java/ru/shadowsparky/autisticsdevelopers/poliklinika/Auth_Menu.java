@@ -15,6 +15,12 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
     private Button _btn;
     private EditText _login;
     private EditText _password;
+    private static String Login;
+
+    public static String getLogin() {
+        return Login;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,7 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
             res = SA.CatchResult();
             if (res == null) { raiseAuthError(); return; }
             if (SA.HandleResult((SQL_Auth) res.get(0))){
+                Login = _login.getText().toString();
                 Intent i = new Intent(this, UserMenu.class);
                 startActivity(i);
                 finish();
