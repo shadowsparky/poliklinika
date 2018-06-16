@@ -24,14 +24,10 @@ import java.util.TimeZone;
 public class AddAppointmentMenu extends AppCompatActivity {
     private int selectedSpecID;
     private int year_x, day_x, month_x;
-    private static final int DIALOG_ID = 0;
     private Spinner spinner;
     private Spinner DocSpinner;
     private String choosedDate;
     private String currentDocNumber;
-    private int testkostil1 = 0;
-    private int testkostil2 = 0;
-    private int testkostil3 = 0;
     Spinner DateSpinner;
     Spinner TimeSpinner;
     DatePickerDialog DPD;

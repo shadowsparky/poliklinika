@@ -6,15 +6,21 @@
     android:layout_height="match_parent"
 
     tools:context=".UserMenu">
+    <fragment
+        android:id="@+id/UserAppointmentsList"
+        android:name="ru.shadowsparky.autisticsdevelopers.poliklinika.AppointmentList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    <TextView
+   <TextView
         android:layout_width="wrap_content"
+        android:id="@+id/isEmptyTV"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="У вас пока что нет записей на прием ко врачу"
+        android:text="У вас пока что нет записей на прием к врачу"
         android:textAlignment="center"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

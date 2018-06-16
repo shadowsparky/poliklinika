@@ -320,3 +320,46 @@ class SQL_AddAppointment extends SQL_Engine implements ISQL {
         return super.CatchResult();
     }
 }
+class SQL_GetUserAppointments extends SQL_Engine implements ISQL {
+    private String AppointmentNumber;
+    private String Time;
+    private String Date;
+    private String Position;
+    public SQL_GetUserAppointments (String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+
+    public String getAppointmentNumber(){return AppointmentNumber;}
+    public String getTime(){return Time;}
+    public String getDate(){return Date;}
+    public String getPosition(){return Position;}
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_GetUserAppointments SA = new SQL_GetUserAppointments(null, null, null);
+        try {
+            SA.AppointmentNumber= object.getString("Appointment_Number");
+            SA.Time = object.getString("Time");
+            SA.Date = object.getString("Date");
+            SA.Position = object.getString("Position");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
+    }
+}
