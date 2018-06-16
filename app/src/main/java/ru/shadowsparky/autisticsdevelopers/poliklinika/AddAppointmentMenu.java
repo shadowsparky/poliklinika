@@ -68,31 +68,33 @@ public class AddAppointmentMenu extends AppCompatActivity {
     }
 
     private void FillAvailableSpec(String [] data){
-        customSpinner cs = new customSpinner();
-        ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, data);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner = findViewById(R.id.spinner);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Выбор специализации
-                if ((!spinner.getSelectedItem().toString().equals("Выберите специальность")) && (!spinner.getSelectedItem().toString().equals(""))) {
-                    clearSpinner(DateSpinner);
-                    clearSpinner(DocSpinner);
-                    clearSpinner(TimeSpinner);
-                    selectedSpecID = position;
-                    DateSpinner.setEnabled(true);
-                    String[] txt = {"Выберите дату"};
-                    changeDateSpinner(txt);
+        if (data != null) {
+            customSpinner cs = new customSpinner();
+            ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, data);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner = findViewById(R.id.spinner);
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    // Выбор специализации
+                    if ((!spinner.getSelectedItem().toString().equals("Выберите специальность")) && (!spinner.getSelectedItem().toString().equals(""))) {
+                        clearSpinner(DateSpinner);
+                        clearSpinner(DocSpinner);
+                        clearSpinner(TimeSpinner);
+                        selectedSpecID = position;
+                        DateSpinner.setEnabled(true);
+                        String[] txt = {"Выберите дату"};
+                        changeDateSpinner(txt);
+                    }
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                }
+            });
+        } else raiseInternetError();
     }
     private View.OnTouchListener spinnerOnTouch = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
@@ -105,18 +107,22 @@ public class AddAppointmentMenu extends AppCompatActivity {
     };
 
     private void changeDateSpinner(String[] res){
-        customSpinner cs = new customSpinner();
-        ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, res);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        DateSpinner.setAdapter(adapter);
-        if ((!DateSpinner.getSelectedItem().toString().equals("Выберите дату")) && (!DateSpinner.getSelectedItem().toString().equals(""))) {
-            clearSpinner(DocSpinner);
-            clearSpinner(TimeSpinner);
-            DocSpinner.setEnabled(true);
-            setDoctors();
-        }
+        if (res != null) {
+            customSpinner cs = new customSpinner();
+            ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, res);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            DateSpinner.setAdapter(adapter);
+            if ((!DateSpinner.getSelectedItem().toString().equals("Выберите дату")) && (!DateSpinner.getSelectedItem().toString().equals(""))) {
+                clearSpinner(DocSpinner);
+                clearSpinner(TimeSpinner);
+                DocSpinner.setEnabled(true);
+                setDoctors();
+            }
+        } else raiseInternetError();
     }
-
+    private void raiseInternetError(){
+        Toast.makeText(this, "Проверьте ваше интернет подключение", Toast.LENGTH_SHORT).show();
+    }
     private void clearSpinner(Spinner _spinner){
         String [] emptyArray = {""};
         ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, emptyArray);
