@@ -1,10 +1,13 @@
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 public class customSpinner {

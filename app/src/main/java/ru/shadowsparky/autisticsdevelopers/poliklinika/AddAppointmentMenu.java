@@ -29,7 +29,9 @@ public class AddAppointmentMenu extends AppCompatActivity {
     private Spinner DocSpinner;
     private String choosedDate;
     private String currentDocNumber;
-    int kostil = 0;
+    private int testkostil1 = 0;
+    private int testkostil2 = 0;
+    private int testkostil3 = 0;
     Spinner DateSpinner;
     Spinner TimeSpinner;
     DatePickerDialog DPD;
@@ -45,13 +47,13 @@ public class AddAppointmentMenu extends AppCompatActivity {
         TimeSpinner = findViewById(R.id.TimeSpinner);
         DateSpinner.setEnabled(false);
         DocSpinner.setEnabled(false);
+        TimeSpinner.setEnabled(false);
         FillAvailableSpec(catchSpec());
         getSupportActionBar().setTitle("Запись на прием");
         final Calendar cal = Calendar.getInstance(TimeZone.getDefault());
         year_x = cal.get(Calendar.YEAR);
         month_x = cal.get(Calendar.MONTH);
         day_x = cal.get(Calendar.DAY_OF_MONTH);
-
         DateSpinner.setOnTouchListener(spinnerOnTouch);
     }
     private String[] catchSpec(){
@@ -79,17 +81,15 @@ public class AddAppointmentMenu extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Выбор специализации
-
-                clearSpinner(DateSpinner);
-                clearSpinner(DocSpinner);
-                clearSpinner(TimeSpinner);
-                selectedSpecID = position;
-                DateSpinner.setEnabled(true);
-                if (kostil == 0) {
+                if ((!spinner.getSelectedItem().toString().equals("Выберите специальность")) && (!spinner.getSelectedItem().toString().equals(""))) {
+                    clearSpinner(DateSpinner);
+                    clearSpinner(DocSpinner);
+                    clearSpinner(TimeSpinner);
+                    selectedSpecID = position;
+                    DateSpinner.setEnabled(true);
                     String[] txt = {"Выберите дату"};
                     changeDateSpinner(txt);
                 }
-                ++kostil;
             }
 
             @Override
@@ -113,9 +113,12 @@ public class AddAppointmentMenu extends AppCompatActivity {
         ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, res);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         DateSpinner.setAdapter(adapter);
-        clearSpinner(DocSpinner);
-        clearSpinner(TimeSpinner);
-        DocSpinner.setEnabled(true);
+        if ((!DateSpinner.getSelectedItem().toString().equals("Выберите дату")) && (!DateSpinner.getSelectedItem().toString().equals(""))) {
+            clearSpinner(DocSpinner);
+            clearSpinner(TimeSpinner);
+            DocSpinner.setEnabled(true);
+            setDoctors();
+        }
     }
 
     private void clearSpinner(Spinner _spinner){
@@ -132,10 +135,9 @@ public class AddAppointmentMenu extends AppCompatActivity {
             month_x = month;
             int FixedMonth = month + 1;
             day_x = dayOfMonth;
-            choosedDate = day_x+ "."+ FixedMonth + "."+year_x;
+            choosedDate = day_x + "." + FixedMonth + "." + year_x;
             String[] Date = {choosedDate};
             changeDateSpinner(Date);
-            setDoctors();
         }
     };
 
@@ -173,9 +175,12 @@ public class AddAppointmentMenu extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Выбор врача
-                clearSpinner(TimeSpinner);
-                currentDocNumber = docNumbers[position];
-                //fillAvailableTime();
+                if ((!DocSpinner.getSelectedItem().toString().equals("Выберите врача")) && (!DocSpinner.getSelectedItem().toString().equals("")) && !DocSpinner.getSelectedItem().toString().equals("Нет доступных врачей")) {
+                    clearSpinner(TimeSpinner);
+                    currentDocNumber = docNumbers[position];
+                    TimeSpinner.setEnabled(true);
+                    fillAvailableTime();
+                }
                 //Toast.makeText(AddAppointmentMenu.this, docNumbers[position] + " " + DocSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
 
@@ -189,7 +194,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
         String[] bindValues = {"Key", "Doctor_Number", "Date"};
         String[] AvailableTime = null;
         String[] Values = {"EnableExecute", currentDocNumber, choosedDate};
-        SQL_AvailableDoctors SA = new SQL_AvailableDoctors(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailabletime.php");
+        SQL_AvailableTime SA = new SQL_AvailableTime(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailabletime.php");
         ArrayList<SQL_Engine> res = SA.CatchResult();
         if (res != null) {
             AvailableTime = new String[res.size() + 1];
@@ -212,24 +217,10 @@ public class AddAppointmentMenu extends AppCompatActivity {
 
     private void fillAvailableTime() {
         String[] TimeArray = GetTime();
-        if (!TimeArray[1].equals("RaiseError")) {
+        if (!TimeArray[0].equals("RaiseError")) {
             ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, TimeArray);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             TimeSpinner.setAdapter(adapter);
-           /* TimeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // Выбор врача
-                    clearSpinner(TimeSpinner);
-                    currentDocNumber = docNumbers[position];
-                    //Toast.makeText(AddAppointmentMenu.this, docNumbers[position] + " " + DocSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            }); */
         }
     }
 }
