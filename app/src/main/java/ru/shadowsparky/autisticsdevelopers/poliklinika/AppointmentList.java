@@ -71,6 +71,29 @@ public class AppointmentList extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Toast.makeText(getActivity(), ids[position],  Toast.LENGTH_SHORT).show();
+        String[] result = new String[9];
+        String[] bindValues = {"Key", "AppointmentNumber"};
+        String[] values = {"EnableExecute", ids[position]};
+        SQL_GetAdditionalAppointmentInfo SGAAI = new SQL_GetAdditionalAppointmentInfo(bindValues, values, "https://autisticapi.shadowsparky.ru/getAdditionalAppointmentInfo.php");
+        ArrayList<SQL_Engine> res = SGAAI.CatchResult();
+        if (res != null) {
+            result[0] = ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientLastName() +
+                    " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientPathronymic();
+            result[1] = ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorLastName() + " " +
+                    ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorPathronymic();
+            result[2] = ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPosition();
+            result[3] = ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDate();
+            result[4] = ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getTime();
+            result[5] = ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getCabinetNumber();
+            Intent i = new Intent(getActivity(), DeployedAppointmentActivity.class);
+            i.putExtra("PacientInfo", result[0]);
+            i.putExtra("DoctorInfo", result[1]);
+            i.putExtra("Position", result[2]);
+            i.putExtra("Date", result[3]);
+            i.putExtra("Time", result[4]);
+            i.putExtra("CabinetNumber", result[5]);
+            i.putExtra("AppointmentNumber", ids[position]);
+            startActivity(i);
+        } else {Toast.makeText(getActivity(), "Во время соединения с сервером произошла ошибка. Проверьте своё интернет соединение", Toast.LENGTH_SHORT).show();}
     }
 }

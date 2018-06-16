@@ -363,3 +363,132 @@ class SQL_GetUserAppointments extends SQL_Engine implements ISQL {
         return super.CatchResult();
     }
 }
+class SQL_GetAdditionalAppointmentInfo extends SQL_Engine implements ISQL {
+    public String getPacientFirstName() {
+        return pacientFirstName;
+    }
+
+    public String getPacientLastName() {
+        return pacientLastName;
+    }
+
+    public String getPacientPathronymic() {
+        return pacientPathronymic;
+    }
+
+    public String getDoctorFirstName() {
+        return doctorFirstName;
+    }
+
+    public String getDoctorLastName() {
+        return doctorLastName;
+    }
+
+    public String getDoctorPathronymic() {
+        return doctorPathronymic;
+    }
+
+    public String getPosition() {
+        return Position;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public String getCabinetNumber() {
+        return CabinetNumber;
+    }
+
+    private String pacientFirstName;
+    private String pacientLastName;
+    private String pacientPathronymic;
+    private String doctorFirstName;
+    private String doctorLastName;
+    private String doctorPathronymic;
+    private String Position;
+    private String Date;
+    private String Time;
+    private String CabinetNumber;
+    public SQL_GetAdditionalAppointmentInfo  (String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_GetAdditionalAppointmentInfo SA = new SQL_GetAdditionalAppointmentInfo(null, null, null);
+        try {
+            SA.pacientFirstName= object.getString("0");
+            SA.pacientLastName= object.getString("1");
+            SA.pacientPathronymic= object.getString("2");
+            SA.doctorFirstName = object.getString("3");
+            SA.doctorLastName = object.getString("4");
+            SA.doctorPathronymic = object.getString("5");
+            SA.Position = object.getString("6");
+            SA.Date = object.getString("7");
+            SA.Time = object.getString("8");
+            SA.CabinetNumber = object.getString("9");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
+    }
+}
+
+class SQL_DropAppointment extends SQL_Engine implements ISQL {
+    public SQL_DropAppointment(String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_DropAppointment SA = new SQL_DropAppointment(null, null, null);
+        try {
+            SA.result= object.getString("0");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
+    }
+}
