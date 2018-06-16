@@ -9,7 +9,7 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="327dp"
+        android:layout_width="300dp"
         android:layout_height="34dp"
         android:layout_marginBottom="200dp"
         android:layout_marginEnd="8dp"
@@ -23,7 +23,7 @@
 
     <Spinner
         android:id="@+id/DateSpinner"
-        android:layout_width="327dp"
+        android:layout_width="300dp"
         android:layout_height="34dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -34,7 +34,7 @@
 
     <Spinner
         android:id="@+id/DoctorsSpinner"
-        android:layout_width="327dp"
+        android:layout_width="300dp"
         android:layout_height="34dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -45,9 +45,9 @@
 
     <Spinner
         android:id="@+id/TimeSpinner"
-        android:layout_width="327dp"
+        android:layout_width="300dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="327dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"

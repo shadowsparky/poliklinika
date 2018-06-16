@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Samsonov Eugene, 2018.
+ */
+
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
 import android.app.DatePickerDialog;

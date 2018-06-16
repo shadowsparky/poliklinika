@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserMenu" />
-        <activity android:name=".AddAppointmentMenu"></activity>
+        <activity android:name=".AddAppointmentMenu" />
+        <activity android:name=".DeployedAppointmentActivity"></activity>
     </application>
 
 </manifest>
