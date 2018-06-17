@@ -31,7 +31,7 @@ public class DeployedAppointmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deployed_appointment);
-        getSupportActionBar().setTitle("О записи");
+        getSupportActionBar().setTitle("Подробная информация о записи");
         _AppointmentView = (TextView) findViewById(R.id.AppointmentNumber);
         _PacientView = (TextView)findViewById(R.id.PacientView);
         _DoctorView = (TextView)findViewById(R.id.DoctorView);

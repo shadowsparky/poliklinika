@@ -1,6 +1,8 @@
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -19,6 +21,14 @@ public abstract class SQL_Engine implements ISQL {
     private String[] Values;
     private String url;
     private Context _context;
+    private View _view;
+
+    public void set_view(View _view) {
+        this._view = _view;
+    }
+    public View getView(){
+        return _view;
+    }
 
     public SQL_Engine(String[] bindValues, String[] values, String url) {
         this.bindValues = bindValues;
@@ -118,7 +128,8 @@ class SQL_Auth extends SQL_Engine implements ISQL {
         SQL_Auth result = (SQL_Auth) se;
         switch(result.result){
             case "Not Exists":
-                Toast.makeText(super.get_context(), "Неправильный логин или пароль", Toast.LENGTH_SHORT).show();
+                Snackbar.make(super.getView(),"Неправильный логин или пароль", Snackbar.LENGTH_SHORT).show();
+//                Toast.makeText(super.get_context(), "Неправильный логин или пароль", Toast.LENGTH_SHORT).show();
                 break;
             case "Exists":
                 Toast.makeText(super.get_context(), "Авторизация прошла успешно!", Toast.LENGTH_SHORT).show();

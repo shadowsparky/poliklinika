@@ -7,6 +7,7 @@ package ru.shadowsparky.autisticsdevelopers.poliklinika;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -63,11 +64,13 @@ public class AddAppointmentMenu extends AppCompatActivity {
         SQL_AvailableSpec SA = new SQL_AvailableSpec(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailablespec.php");
         SA.set_context(this);
         ArrayList<SQL_Engine> res = SA.CatchResult();
-        result = new String[res.size() + 1];
-        result[0] = "Выберите специальность";
-        for (int i = 0; i < res.size(); i++) {
-            result[i + 1] = ((SQL_AvailableSpec)res.get(i)).getResult();
-        }
+        if (res != null) {
+            result = new String[res.size() + 1];
+            result[0] = "Выберите специальность";
+            for (int i = 0; i < res.size(); i++) {
+                result[i + 1] = ((SQL_AvailableSpec) res.get(i)).getResult();
+            }
+        } else {Toast.makeText(this, "Во время соединения с сервером произошла ошибка. Проверьте своё интернет соединение", Toast.LENGTH_SHORT).show();}
         return result;
     }
 
@@ -153,23 +156,25 @@ public class AddAppointmentMenu extends AppCompatActivity {
         String[] Values = {"EnableExecute", spinner.getSelectedItem().toString(), choosedDate};
         SQL_AvailableDoctors SA = new SQL_AvailableDoctors(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailabledocs.php");
         ArrayList<SQL_Engine> res = SA.CatchResult();
-        this.docNumbers = new String[res.size() + 1];
-        this.docsData = new String[res.size() + 1];
-        this.docsData[0] = "Выберите врача";
-        for (int i = 0; i < res.size(); i++){
-            if (((SQL_AvailableDoctors)res.get(i)).get_Result() == null) {
-                String TMPStr = ((SQL_AvailableDoctors)res.get(i)).getFirst_Name() + " " + ((SQL_AvailableDoctors)res.get(i)).getLast_Name() + " " + ((SQL_AvailableDoctors)res.get(i)).getPathronymic();
-                if (!TMPStr.equals("null null null")) {
-                    docsData[i+1] = (TMPStr);
-                    docNumbers[i+1] = ((SQL_AvailableDoctors) res.get(i)).getDoctor_Number();
+        if (res != null) {
+            this.docNumbers = new String[res.size() + 1];
+            this.docsData = new String[res.size() + 1];
+            this.docsData[0] = "Выберите врача";
+            for (int i = 0; i < res.size(); i++) {
+                if (((SQL_AvailableDoctors) res.get(i)).get_Result() == null) {
+                    String TMPStr = ((SQL_AvailableDoctors) res.get(i)).getFirst_Name() + " " + ((SQL_AvailableDoctors) res.get(i)).getLast_Name() + " " + ((SQL_AvailableDoctors) res.get(i)).getPathronymic();
+                    if (!TMPStr.equals("null null null")) {
+                        docsData[i + 1] = (TMPStr);
+                        docNumbers[i + 1] = ((SQL_AvailableDoctors) res.get(i)).getDoctor_Number();
+                    }
                 }
             }
-        }
-        if (docsData[1] == null) {
-            this.docsData = error;
-            Toast.makeText(this, R.string.DoctorsSelectFail, Toast.LENGTH_SHORT).show();
-        }
-        fillAvaliableDocs();
+            if (docsData[1] == null) {
+                this.docsData = error;
+                Toast.makeText(this, R.string.DoctorsSelectFail, Toast.LENGTH_SHORT).show();
+            }
+            fillAvaliableDocs();
+        } else {Toast.makeText(this, "Во время соединения с сервером произошла ошибка. Проверьте своё интернет соединение", Toast.LENGTH_SHORT).show();}
     }
 
     private void fillAvaliableDocs(){
@@ -230,7 +235,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
         }
     }
     public void AddAppointmentButtonClick(View view) {
-        if (SpinnersChecker()) {
+        if (SpinnersChecker(view)) {
             String ExecuteResult = getAddAppointmentResult();
             if (!ExecuteResult.equals("RaiseError")) {
                 Toast.makeText(this, "Запись на приём успешно добавлена", Toast.LENGTH_SHORT).show();
@@ -300,15 +305,15 @@ public class AddAppointmentMenu extends AppCompatActivity {
         return false;
     }
 
-    private Boolean SpinnersChecker() {
+    private Boolean SpinnersChecker(View v) {
         if (checkSpecSpinner()){
             if (checkDateSpinner()) {
                 if (checkDocSpinner()){
                     if (checkTimeSpinner()){
                         return true;
-                    } else {Toast.makeText(this, "Пожалуйста, выберите информацию о необходимом времени", Toast.LENGTH_SHORT).show(); return false;}
-                } else { Toast.makeText(this, "Пожалуйста, выберите информацию о необходимом враче", Toast.LENGTH_SHORT).show(); return false;}
-            } else { Toast.makeText(this, "Пожалуйста, выберите информацию о необходимой дате", Toast.LENGTH_SHORT).show(); return false;}
-        } else { Toast.makeText(this, "Пожалуйста, выберите информацию о необходимой специализации", Toast.LENGTH_SHORT).show(); return false;}
+                    } else {Snackbar.make(v,"Пожалуйста, выберите информацию о необходимом времени", Snackbar.LENGTH_SHORT).show(); return false;}
+                } else { Snackbar.make(v, "Пожалуйста, выберите информацию о необходимом враче", Snackbar.LENGTH_SHORT).show(); return false;}
+            } else { Snackbar.make(v, "Пожалуйста, выберите информацию о необходимой дате", Snackbar.LENGTH_SHORT).show(); return false;}
+        } else { Snackbar.make(v, "Пожалуйста, выберите информацию о необходимой специализации", Snackbar.LENGTH_SHORT).show(); return false;}
     }
 }
