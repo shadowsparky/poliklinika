@@ -35,6 +35,7 @@ public class AppointmentList extends ListFragment {
 
     private String[] throwListResult(){
         String [] result = null;
+        tv = (TextView) getActivity().findViewById(R.id.isEmptyTV);
         String [] bindValues = {"Key", "Login"};
         String [] values = {"EnableExecute", Auth_Menu.getLogin()};
         SQL_GetUserAppointments SG = new SQL_GetUserAppointments(bindValues, values, "https://autisticapi.shadowsparky.ru/getalluserappointments.php");
@@ -48,10 +49,11 @@ public class AppointmentList extends ListFragment {
                 result[i] = "Дата: "+ ((SQL_GetUserAppointments) res.get(i)).getDate() + ", время: " + ((SQL_GetUserAppointments) res.get(i)).getTime() +
                         ", специальность: " + ((SQL_GetUserAppointments) res.get(i)).getPosition();
             }
-            tv = (TextView) getActivity().findViewById(R.id.isEmptyTV);
             tv.setVisibility(View.INVISIBLE);
+            getView().setVisibility(View.VISIBLE);
         } else {
             getView().setVisibility(View.INVISIBLE);
+            tv.setVisibility(View.VISIBLE);
             return null;
         }
         return result;

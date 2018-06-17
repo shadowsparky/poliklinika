@@ -55,4 +55,8 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
     private void raiseAuthError() {
         Toast.makeText(this, "При соединении с сервером произошла ошибка. Проверьте свое подключение к интернету", Toast.LENGTH_LONG).show();
     }
+    public void registrationButtonClick(View view){
+        Intent i = new Intent(this, user_registration.class);
+        startActivity(i);
+    }
 }
