@@ -503,3 +503,41 @@ class SQL_DropAppointment extends SQL_Engine implements ISQL {
         return super.CatchResult();
     }
 }
+
+class SQL_CreateUser extends SQL_Engine implements ISQL {
+    public SQL_CreateUser(String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_CreateUser SA = new SQL_CreateUser(null, null, null);
+        try {
+            SA.result= object.getString("Result");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult() {
+        return super.CatchResult();
+    }
+}

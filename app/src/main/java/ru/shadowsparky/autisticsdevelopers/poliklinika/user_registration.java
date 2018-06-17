@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,26 +51,35 @@ public class user_registration extends AppCompatActivity {
 
     public void onClickRegisterButton(View v){
         CheckBox cb = (CheckBox) findViewById(R.id.PersonalDataBOX);
-        EditText LastName = (EditText)findViewById(R.id.reg_LastName);
-        EditText FirstName = (EditText)findViewById(R.id.reg_FirstName);
-        EditText Pathronymic = (EditText)findViewById(R.id.reg_Pathronymic);
         EditText Login = (EditText)findViewById(R.id.reg_Login);
         EditText Password = (EditText) findViewById(R.id.reg_Password);
         if (cb.isChecked()) {
             if (checkPolicyNumber()){
-                if (checkEmpty(LastName, "Ваша фамилия не может быть пустой")){
-                    if (checkEmpty(FirstName, "Ваше имя не может быть пустым")){
-                        if (checkEmpty(Login, "Ваш логин не может быть пустым")){
-                            if (checkEmpty(Password, "Ваш пароль не может быть пустым")) {
-                                if (checkPassword(Password)) {
-                                    Snackbar.make(v, "ок", Snackbar.LENGTH_SHORT).show();
-                                }
-                            }
+                if (checkEmpty(Login, "Ваш логин не может быть пустым")){
+                    if (checkEmpty(Password, "Ваш пароль не может быть пустым")) {
+                        if (checkPassword(Password)) {
+                            createUser(v);
                         }
                     }
                 }
             }
         } else {
             Snackbar.make(v, "Вы должны дать согласие на обработку Ваших персональных данных", Snackbar.LENGTH_SHORT).show();}
+    }
+    public void createUser(View v){
+        EditText PolicyNumber = (EditText) findViewById(R.id.reg_PolicyNumber);
+        EditText Login = (EditText)findViewById(R.id.reg_Login);
+        EditText Password = (EditText) findViewById(R.id.reg_Password);
+        String[] bindValues = {"Key", "Policy_Number", "Login", "Password"};
+        String[] values = {"EnableExecute",PolicyNumber.getText().toString(), Login.getText().toString(), Password.getText().toString()};
+        SQL_CreateUser SCU = new SQL_CreateUser(bindValues, values, "https://autisticapi.shadowsparky.ru/userRegister.php");
+        ArrayList<SQL_Engine> res = SCU.CatchResult();
+        String result = ((SQL_CreateUser)res.get(0)).getResult();
+        if (!result.equals("Ваш аккаунт успешно зарегистрирован")) {
+            Snackbar.make(v, result, Snackbar.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }
