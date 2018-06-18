@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Samsonov Eugene, 2018.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/exititem"
+        android:title="Выйти из аккаунта"
+        android:onClick="DropSavedData">
+    </item>
+</menu>
