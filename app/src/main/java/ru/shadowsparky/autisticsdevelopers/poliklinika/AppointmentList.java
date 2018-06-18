@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AppointmentList extends ListFragment {
@@ -26,28 +28,32 @@ public class AppointmentList extends ListFragment {
     }
 
     private void setAppointments() {
-        String[]data = throwListResult();
+        ArrayList<HashMap<String, String>> data = throwListResult();
         if (data != null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
+            SimpleAdapter adapter = new SimpleAdapter(getActivity(), data, android.R.layout.simple_list_item_2,
+                    new String[] {"Specialization", "Date and Time"},
+                    new int[]{android.R.id.text1, android.R.id.text2});
             setListAdapter(adapter);
         }
     }
 
-    private String[] throwListResult(){
-        String [] result = null;
+    private ArrayList<HashMap<String, String>> throwListResult(){
+        ArrayList<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+
         tv = (TextView) getActivity().findViewById(R.id.isEmptyTV);
         String [] bindValues = {"Key", "Login"};
         String [] values = {"EnableExecute", Auth_Menu.getLogin()};
         SQL_GetUserAppointments SG = new SQL_GetUserAppointments(bindValues, values, "https://autisticapi.shadowsparky.ru/getalluserappointments.php");
         SG.set_context(getActivity());
         ArrayList<SQL_Engine> res = SG.CatchResult();
-        result = new String[res.size()];
         ids = new String[res.size()];
         if (!((SQL_GetUserAppointments)res.get(0)).getAppointmentNumber().equals("Записи отсутствуют")) {
             for (int i = 0; i < res.size(); i++) {
                 ids[i] = ((SQL_GetUserAppointments) res.get(i)).getAppointmentNumber();
-                result[i] = "Дата: "+ ((SQL_GetUserAppointments) res.get(i)).getDate() + ", время: " + ((SQL_GetUserAppointments) res.get(i)).getTime() +
-                        ", специальность: " + ((SQL_GetUserAppointments) res.get(i)).getPosition();
+                HashMap<String, String> TMPResult = new HashMap<String, String>();
+                TMPResult.put("Specialization",((SQL_GetUserAppointments) res.get(i)).getPosition());
+                TMPResult.put("Date and Time", ( "Время: "+((SQL_GetUserAppointments) res.get(i)).getTime() + ", дата: " + ((SQL_GetUserAppointments) res.get(i)).getDate()));
+                result.add(TMPResult);
             }
             tv.setVisibility(View.INVISIBLE);
             getView().setVisibility(View.VISIBLE);
