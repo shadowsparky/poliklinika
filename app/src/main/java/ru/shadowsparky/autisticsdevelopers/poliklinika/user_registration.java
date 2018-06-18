@@ -74,12 +74,18 @@ public class user_registration extends AppCompatActivity {
         String[] values = {"EnableExecute",PolicyNumber.getText().toString(), Login.getText().toString(), Password.getText().toString()};
         SQL_CreateUser SCU = new SQL_CreateUser(bindValues, values, "https://autisticapi.shadowsparky.ru/userRegister.php");
         ArrayList<SQL_Engine> res = SCU.CatchResult();
-        String result = ((SQL_CreateUser)res.get(0)).getResult();
-        if (!result.equals("Ваш аккаунт успешно зарегистрирован")) {
-            Snackbar.make(v, result, Snackbar.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        if (res != null) {
+            String result = ((SQL_CreateUser) res.get(0)).getResult();
+            if (result != null) {
+                if (!result.equals("Ваш аккаунт успешно зарегистрирован")) {
+                    Snackbar.make(v, result, Snackbar.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            } else
+                Snackbar.make(v, "При подключении к серверу произошла ошибка. Проверьте ваше соединение с интернетом", Snackbar.LENGTH_SHORT).show();
+        } else
+            Snackbar.make(v, "При подключении к серверу произошла ошибка. Проверьте ваше соединение с интернетом", Snackbar.LENGTH_SHORT).show();
     }
 }

@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -73,7 +74,7 @@ public abstract class SQL_Engine implements ISQL {
         return jArr;
     }
     @Override
-    public ArrayList<SQL_Engine> CatchResult(){
+    public ArrayList<SQL_Engine> CatchResult() {
         ArrayList<SQL_Engine> res = null;
         try{
             this.set_context(_context);
@@ -537,7 +538,7 @@ class SQL_CreateUser extends SQL_Engine implements ISQL {
         return super.Post();
     }
     @Override
-    public ArrayList<SQL_Engine> CatchResult() {
+    public ArrayList<SQL_Engine> CatchResult(){
         return super.CatchResult();
     }
 }

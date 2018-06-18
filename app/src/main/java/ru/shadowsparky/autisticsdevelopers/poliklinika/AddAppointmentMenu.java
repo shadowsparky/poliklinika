@@ -56,11 +56,12 @@ public class AddAppointmentMenu extends AppCompatActivity {
         month_x = cal.get(Calendar.MONTH);
         day_x = cal.get(Calendar.DAY_OF_MONTH);
         DateSpinner.setOnTouchListener(spinnerOnTouch);
+
     }
     private String[] catchSpec(){
         String[] result = null;
-        String [] bindValues = {"Key"};
-        String [] Values = {"EnableExecute"};
+        String [] bindValues = {"Key", "Login"};
+        String [] Values = {"EnableExecute", Auth_Menu.getLogin()};
         SQL_AvailableSpec SA = new SQL_AvailableSpec(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailablespec.php");
         SA.set_context(this);
         ArrayList<SQL_Engine> res = SA.CatchResult();
@@ -251,12 +252,14 @@ public class AddAppointmentMenu extends AppCompatActivity {
         ArrayList<SQL_Engine> res = SA.CatchResult();
         if (res != null) {
             result = ((SQL_AddAppointment) res.get(0)).getResult();
-            if (result.equals("Регистрирование на прием невозможно. Попробуйте выбрать другое время") ||
-                    (result.equals("Во время регистрации на прием произошла техническая ошибка. Обратитесь к системному администратору")) ||
-                        (result.equals("На эту дату приема больше нет. Пожалуйста, выберите другую дату"))){
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-                return "RaiseError";
-            }
+            if (result != null){
+                if (result.equals("Регистрирование на прием невозможно. Попробуйте выбрать другое время") ||
+                        (result.equals("Во время регистрации на прием произошла техническая ошибка. Обратитесь к системному администратору")) ||
+                            (result.equals("На эту дату приема больше нет. Пожалуйста, выберите другую дату"))){
+                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                    return "RaiseError";
+                }
+            } else {Toast.makeText(this, "У выбранного вами врача уже есть запись на это время. Пожалуйста, выберите другое время", Toast.LENGTH_SHORT).show(); return "RaiseError";}
         } else {
             Toast.makeText(this, "Во время добавления записи произошла критическая ошибка. Проверьте ваше интернет соединение", Toast.LENGTH_SHORT).show();
             return "RaiseError";
