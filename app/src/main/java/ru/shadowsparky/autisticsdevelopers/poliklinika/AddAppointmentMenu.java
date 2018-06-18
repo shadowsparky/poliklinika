@@ -50,7 +50,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
         DocSpinner.setEnabled(false);
         TimeSpinner.setEnabled(false);
         FillAvailableSpec(catchSpec());
-        getSupportActionBar().setTitle("Запись на прием");
         final Calendar cal = Calendar.getInstance(TimeZone.getDefault());
         year_x = cal.get(Calendar.YEAR);
         month_x = cal.get(Calendar.MONTH);
@@ -74,7 +73,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
         } else {Toast.makeText(this, "Во время соединения с сервером произошла ошибка. Проверьте своё интернет соединение", Toast.LENGTH_SHORT).show();}
         return result;
     }
-
     private void FillAvailableSpec(String [] data){
         if (data != null) {
             customSpinner cs = new customSpinner();
@@ -113,7 +111,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
             return false;
         }
     };
-
     private void changeDateSpinner(String[] res){
         if (res != null) {
             customSpinner cs = new customSpinner();
@@ -137,7 +134,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         _spinner.setAdapter(adapter);
     }
-
     private DatePickerDialog.OnDateSetListener dpickerListner = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -150,7 +146,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
             changeDateSpinner(Date);
         }
     };
-
     private void setDoctors() {
         String[] bindValues = {"Key", "Position", "Date"};
         String[] error = {"Нет доступных врачей"};
@@ -177,7 +172,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
             fillAvaliableDocs();
         } else {Toast.makeText(this, "Во время соединения с сервером произошла ошибка. Проверьте своё интернет соединение", Toast.LENGTH_SHORT).show();}
     }
-
     private void fillAvaliableDocs(){
         DocSpinner = findViewById(R.id.DoctorsSpinner);
         ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, docsData);
@@ -226,7 +220,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
         }
         return AvailableTime;
     }
-
     private void fillAvailableTime() {
         String[] TimeArray = GetTime();
         if (!TimeArray[0].equals("RaiseError")) {
@@ -266,7 +259,6 @@ public class AddAppointmentMenu extends AppCompatActivity {
         }
         return result;
     }
-
     private Boolean checkSpecSpinner(){
         if (spinner != null) {
             if ((spinner.getSelectedItem().toString().equals("Выберите специальность")) || (spinner.getSelectedItem().toString().equals(""))) {
@@ -307,8 +299,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
         }
         return false;
     }
-
-    private Boolean SpinnersChecker(View v) {
+   private Boolean SpinnersChecker(View v) {
         if (checkSpecSpinner()){
             if (checkDateSpinner()) {
                 if (checkDocSpinner()){
