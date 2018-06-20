@@ -78,12 +78,12 @@
         <TableRow>
             <Button
                 android:id="@+id/AuthButton"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:background="?attr/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_span="2"
-                android:background="@drawable/border"
                 android:onClick="onClick"
                 android:text="Войти" />
         </TableRow>

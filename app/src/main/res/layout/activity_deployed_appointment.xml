@@ -115,14 +115,14 @@
 
                 <Button
                     android:id="@+id/cancelAppointment"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:background="?attr/colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="70dp"
-                    android:background="@drawable/border"
                     android:onClick="onDeleteAppointmentButtonClick"
                     android:text="Отменить запись"
                     app:layout_constraintBottom_toBottomOf="parent"

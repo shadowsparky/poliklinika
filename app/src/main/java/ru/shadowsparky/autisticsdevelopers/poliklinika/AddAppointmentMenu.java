@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class AddAppointmentMenu extends AppCompatActivity {
+    public static final String GETAVAILAVLESPEC_URL = "https://autisticapi.shadowsparky.ru/getavailablespec.php";
     private int selectedSpecID;
     private int year_x, day_x, month_x;
     private Spinner spinner;
@@ -61,16 +62,16 @@ public class AddAppointmentMenu extends AppCompatActivity {
         String[] result = null;
         String [] bindValues = {"Key", "Login"};
         String [] Values = {"EnableExecute", Auth_Menu.getLogin()};
-        SQL_AvailableSpec SA = new SQL_AvailableSpec(bindValues, Values, "https://autisticapi.shadowsparky.ru/getavailablespec.php");
+        SQL_AvailableSpec SA = new SQL_AvailableSpec(bindValues, Values,GETAVAILAVLESPEC_URL);
         SA.set_context(this);
         ArrayList<SQL_Engine> res = SA.CatchResult();
         if (res != null) {
             result = new String[res.size() + 1];
-            result[0] = "Выберите специальность";
+            result[0] = getResources().getString(R.string.choose_spec);
             for (int i = 0; i < res.size(); i++) {
                 result[i + 1] = ((SQL_AvailableSpec) res.get(i)).getResult();
             }
-        } else {Toast.makeText(this, "Во время соединения с сервером произошла ошибка. Проверьте своё интернет соединение", Toast.LENGTH_SHORT).show();}
+        } else raiseInternetError();
         return result;
     }
     private void FillAvailableSpec(String [] data){
@@ -117,7 +118,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
             ArrayAdapter<String> adapter = customSpinner.throwCustomSpinner(this, android.R.layout.simple_spinner_item, res);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             DateSpinner.setAdapter(adapter);
-            if ((!DateSpinner.getSelectedItem().toString().equals("Выберите дату")) && (!DateSpinner.getSelectedItem().toString().equals(""))) {
+            if ((!DateSpinner.getSelectedItem().toString().equals(getResources().getString(R.string.choose_date))) && (!DateSpinner.getSelectedItem().toString().equals(""))) {
                 clearSpinner(DocSpinner);
                 clearSpinner(TimeSpinner);
                 DocSpinner.setEnabled(true);
@@ -126,7 +127,7 @@ public class AddAppointmentMenu extends AppCompatActivity {
         } else raiseInternetError();
     }
     private void raiseInternetError(){
-        Toast.makeText(this, "Проверьте ваше интернет подключение", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.connection_error), Toast.LENGTH_SHORT).show();
     }
     private void clearSpinner(Spinner _spinner){
         String [] emptyArray = {""};

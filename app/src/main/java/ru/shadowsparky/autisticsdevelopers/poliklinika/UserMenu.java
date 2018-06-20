@@ -15,7 +15,7 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
-        getSupportActionBar().setTitle("Мои записи");
+        getSupportActionBar().setTitle(R.string.My_Appointments);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
                 Intent i = new Intent(this, Auth_Menu.class);
                 startActivity(i);
                 finish();
-                Toast.makeText(this, "Вы успешно вышли из аккаунта", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.account_exit, Toast.LENGTH_SHORT).show();
                 break;
         }
     }

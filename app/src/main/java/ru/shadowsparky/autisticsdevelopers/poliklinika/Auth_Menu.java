@@ -13,6 +13,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Auth_Menu extends AppCompatActivity implements View.OnClickListener {
+    public static final String AUTH_URL = "https://autisticapi.shadowsparky.ru/auth.php";
+
     private Button _btn;
     private EditText _login;
     private EditText _password;
@@ -21,9 +23,7 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
     public static SharedPreferences getsPref() {
         return sPref;
     }
-
     private static SharedPreferences sPref;
-
     public static String getLogin() {
         return Login;
     }
@@ -34,7 +34,6 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_auth__menu);
         _login = findViewById(R.id.LoginBox);
         _password = findViewById(R.id.PasswordBox);
-        getSupportActionBar().setTitle("Авторизация");
         LoadAccountData();
     }
 
@@ -43,7 +42,7 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
         auth();
     }
     private void raiseAuthError() {
-        Toast.makeText(this, "При соединении с сервером произошла ошибка. Проверьте свое подключение к интернету", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
     }
     public void registrationButtonClick(View view){
         Intent i = new Intent(this, user_registration.class);
@@ -63,7 +62,7 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
                 SQL_Auth result = null;
                 String[] bindValues = {"Key", "Login", "Password"};
                 String[] values = {"EnableExecute", _login.getText().toString(), _password.getText().toString()};
-                SQL_Auth SA = new SQL_Auth(bindValues, values, "https://autisticapi.shadowsparky.ru/auth.php");
+                SQL_Auth SA = new SQL_Auth(bindValues, values, AUTH_URL);
                 SA.set_context(this);
                 res = SA.CatchResult();
                 if (res == null) {

@@ -53,15 +53,15 @@
 
     <Button
         android:id="@+id/AuthButton"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="?attr/colorPrimary"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/border"
         android:onClick="onClick"
-        android:text="Войти"
+        android:text="@string/user_auth_go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
@@ -75,7 +75,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="registrationButtonClick"
-        android:text="Зарегистрироваться"
+        android:text="@string/user_register_go"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -87,7 +87,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        android:text="Моя Поликлиника"
+        android:text="@string/user_auth"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"

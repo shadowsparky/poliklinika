@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Моя Поликлиника</string>
+    <string name="user_auth">Авторизация</string>
+    <string name="user_register">Регистрация</string>
+    <string name="user_auth_go">Войти</string>
+    <string name="user_register_go">Зарегистрироваться</string>
+    <string name="connection_error">При соединении с сервером произошла ошибка. Проверьте свое подключение к интернету</string>
 
+    <string name="My_Appointments">Мои записи</string>
+    <string name="account_exit">Вы успешно вышли из аккаунта</string>
+    <string name="choose_spec">Выберите специальность</string>
+    <string name="choose_date">Выберите дату</string>
     <!-- hints -->
     <string name="Auth_LoginBoxHint">Введите логин</string>
     <string name="Auth_PasswordBoxHint">Введите пароль</string>
