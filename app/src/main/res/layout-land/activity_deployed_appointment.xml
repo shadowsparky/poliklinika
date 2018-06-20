@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Samsonov Eugene, 2018.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeployedAppointmentActivity"
+    android:layout_margin="8dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:stretchColumns="*">
+                <TableRow
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:id="@+id/AppointmentNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Номер записи: "
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textSize="20dp"
+                        android:layout_span="2"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/PacientView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Пациент: "
+                        android:layout_span="2"
+                        android:textSize="18dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/DoctorView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Врач: "
+                        android:layout_span="2"
+                        android:textSize="18dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/SpecializationView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Специальность: "
+                        android:layout_span="2"
+                        android:textSize="18dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/DateView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Дата: "
+                        android:textSize="18dp"/>
+                    <TextView
+                        android:id="@+id/TimeView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Время: "
+                        android:textSize="18dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/CabinetView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Кабинет: "
+                        android:textSize="18dp"/>
+                </TableRow>
+                <TableRow>
+                    <Button
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/cancelAppointment"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="?attr/colorPrimary"
+                        android:layout_span="2"
+                        android:onClick="onDeleteAppointmentButtonClick"
+                        android:text="Отменить запись" />
+                </TableRow>
+            </TableLayout>
+        </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

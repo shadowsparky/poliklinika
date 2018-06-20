@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Samsonov Eugene, 2018.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Auth_Menu">
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="*"
+        android:gravity="center"
+        android:layout_margin="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Регистрация"
+                android:layout_span="2"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="27sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </TableRow>
+
+        <TableRow>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp">
+
+                <EditText
+                    android:id="@+id/LoginBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/Auth_LoginBoxHint"
+                    android:inputType="textPersonName"
+                    android:maxLength="30" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp">
+
+                <EditText
+                    android:id="@+id/PasswordBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/Auth_PasswordBoxHint"
+                    android:inputType="textPassword"
+                    android:maxLength="30"
+                    tools:layout_editor_absoluteX="5dp"
+                    tools:layout_editor_absoluteY="50dp" />
+            </android.support.design.widget.TextInputLayout>
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/AuthButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:background="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_span="2"
+                android:onClick="onClick"
+                android:text="Войти" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/RegistrationButton"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="registrationButtonClick"
+                android:layout_span="2"
+                android:text="Зарегистрироваться"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </TableRow>
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>
