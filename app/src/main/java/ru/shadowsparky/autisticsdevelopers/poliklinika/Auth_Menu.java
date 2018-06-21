@@ -19,7 +19,7 @@ public class Auth_Menu extends AppCompatActivity implements View.OnClickListener
     private EditText _login;
     private EditText _password;
     private static String Login;
-
+    // test
     public static SharedPreferences getsPref() {
         return sPref;
     }
