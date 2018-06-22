@@ -121,11 +121,11 @@ class SQL_Auth extends SQL_Engine implements ISQL {
         SQL_Auth result = (SQL_Auth) se;
         switch(result.result){
             case "Not Exists":
-                Toast.makeText(super.get_context(),"Неправильный логин или пароль", Toast.LENGTH_SHORT).show();
-//                Toast.makeText(super.get_context(), "Неправильный логин или пароль", Toast.LENGTH_SHORT).show();
+                Toast.makeText(super.get_context(),"Неправильный  логин или пароль", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(super.get_context(), "Неправиль ный логин или пароль", Toast.LENGTH_SHORT).show();
                 break;
             case "Exists":
-                Toast.makeText(super.get_context(), "Авторизация прошла успешно!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(super.get_context(), "Авторизация  прошла успешно!", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return false;

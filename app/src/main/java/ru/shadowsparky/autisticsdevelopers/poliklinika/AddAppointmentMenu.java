@@ -34,11 +34,11 @@ public class AddAppointmentMenu extends AppCompatActivity {
     private Spinner DocSpinner;
     private String choosedDate;
     private String currentDocNumber;
-    Spinner DateSpinner;
-    Spinner TimeSpinner;
-    DatePickerDialog DPD;
-    String[] docNumbers;
-    String[] docsData;
+    private Spinner DateSpinner;
+    private Spinner TimeSpinner;
+    private DatePickerDialog DPD;
+    private String[] docNumbers;
+    private String[] docsData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

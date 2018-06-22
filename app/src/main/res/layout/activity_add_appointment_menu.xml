@@ -108,6 +108,5 @@
                     app:layout_constraintTop_toBottomOf="@+id/TimeSpinner" />
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
-
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

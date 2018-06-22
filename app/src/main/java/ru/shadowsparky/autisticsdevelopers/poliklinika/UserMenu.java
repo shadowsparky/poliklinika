@@ -32,6 +32,8 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
                 startActivity(i);
                 finish();
                 Toast.makeText(this, R.string.account_exit, Toast.LENGTH_SHORT).show();
+                Shorcuts_Create sc = new Shorcuts_Create(this);
+                sc.setShortcut(false);
                 break;
         }
     }
