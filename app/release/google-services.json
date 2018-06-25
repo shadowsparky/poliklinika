@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1062409530967",
+    "firebase_url": "https://poliklinika-b0afa.firebaseio.com",
+    "project_id": "poliklinika-b0afa",
+    "storage_bucket": "poliklinika-b0afa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062409530967:android:edc891ce5ebe9bf8",
+        "android_client_info": {
+          "package_name": "ru.shadowsparky.autisticsdevelopers.poliklinika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062409530967-lnuf39vtjbmgluj6tqp95pv23qeagbl6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.shadowsparky.autisticsdevelopers.poliklinika",
+            "certificate_hash": "6d08259c46620436d2cdd661fe6ccdaf5fd81c25"
+          }
+        },
+        {
+          "client_id": "1062409530967-hr3vjillc375a1dbfs6pfh86o1uqd18t.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1062409530967-hr3vjillc375a1dbfs6pfh86o1uqd18t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuNSbrz1d1ZfNd_As7rS0GP0v-plnPlBc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062409530967-hr3vjillc375a1dbfs6pfh86o1uqd18t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
