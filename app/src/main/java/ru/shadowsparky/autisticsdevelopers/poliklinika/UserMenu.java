@@ -1,5 +1,6 @@
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,9 @@ import android.widget.Toast;
 
 public class UserMenu extends AppCompatActivity implements View.OnClickListener {
     private DrawerLayout mDrawerLayout;
+    private AppointmentFragment _appointmentFrag = new AppointmentFragment();
+    private ServiceFragment _serviceFrag = new ServiceFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,23 +31,32 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         getSupportActionBar().setTitle(R.string.My_Appointments);
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
+        FragmentTransaction ftrans = getFragmentManager().beginTransaction();
+        ftrans.replace(R.id.container, _appointmentFrag).commit();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
+                        int id = menuItem.getItemId();
+                        FragmentTransaction ftrans = getFragmentManager().beginTransaction();
+                        if (id == R.id.myAppointments){
+                            ftrans.replace(R.id.container, _appointmentFrag);
+
+                            Toast.makeText(getBaseContext(), "Appointments click", Toast.LENGTH_SHORT).show();
+                        } else if (id == R.id.myServices){
+                            ftrans.replace(R.id.container, _serviceFrag);
+                            Toast.makeText(getBaseContext(), "Services click", Toast.LENGTH_SHORT).show();
+                        } ftrans.commit();
+
+                        menuItem.setChecked(true);
+                        mDrawerLayout.closeDrawers();
 
                         return true;
                     }
                 });
+        navigationView.setCheckedItem(R.id.myAppointments);
     }
 
     @Override

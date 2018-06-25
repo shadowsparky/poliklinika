@@ -6,11 +6,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/myAppointments"
             android:icon="@mipmap/ic_add_icon"
             android:title="Мои Записи" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/myServices"
             android:icon="@mipmap/ic_add_icon"
             android:title="Мои Услуги" />
     </group>
