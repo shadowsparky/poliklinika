@@ -17,5 +17,11 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Вы пока что не записывались на услуги" />
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_action_add" />
 </FrameLayout>

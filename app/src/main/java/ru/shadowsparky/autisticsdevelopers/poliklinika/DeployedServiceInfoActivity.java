@@ -20,6 +20,7 @@ public class DeployedServiceInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_deployed_service_info);
         _idView = findViewById(R.id.DeployedServiceIdTV);
         _pacientView = findViewById(R.id.DeployedServicePacientTV);
         _cabinetView = findViewById(R.id.DeployedServiceCabinetTV);
@@ -35,6 +36,5 @@ public class DeployedServiceInfoActivity extends AppCompatActivity {
         _serviceView.setText(_serviceView.getText() + myIntent.getStringExtra("ServiceInfo"));
         _timeView.setText(_serviceView.getText() + myIntent.getStringExtra("Time"));
         _dateView.setText(_dateView.getText() + myIntent.getStringExtra("Date"));
-        setContentView(R.layout.activity_deployed_service_info);
     }
 }

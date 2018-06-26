@@ -79,6 +79,7 @@ public class ServicesList extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+
         String[] bindValues = {"Key", "Service_ID"};
         String[] values = {"EnableExecute", ids[position]};
         getServiceInfo(position, bindValues, values);
@@ -100,7 +101,6 @@ public class ServicesList extends ListFragment {
                 Intent i = new Intent(getActivity(), DeployedServiceInfoActivity.class);
                 String[] valuesIntent = {"ID","PacientInfo", "CabinetInfo", "CostInfo", "ServiceInfo", "Time", "Date"};
                 putin(i, valuesIntent, TMPResultArray);
-                i.putExtra("AppointmentNumber", ids[position]);
                 startActivity(i);
             } else {
                 Toast.makeText(getActivity(), "Запись не найдена", Toast.LENGTH_SHORT).show();}

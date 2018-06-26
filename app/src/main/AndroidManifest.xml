@@ -21,6 +21,7 @@
         <activity android:name=".UserMenu" />
         <activity android:name=".AddAppointmentMenu" />
         <activity android:name=".DeployedAppointmentActivity" />
+        <activity android:name=".DeployedServiceInfoActivity" />
         <activity android:name=".user_registration"></activity>
     </application>
 

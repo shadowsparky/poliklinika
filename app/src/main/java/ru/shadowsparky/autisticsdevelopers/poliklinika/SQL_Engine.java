@@ -651,14 +651,14 @@ class SQL_GetAdditionalServiceInfo extends SQL_Engine implements ISQL {
     public SQL_Engine parseJson(JSONObject object) {
         SQL_GetAdditionalServiceInfo  SA = new SQL_GetAdditionalServiceInfo (null, null, null);
         try {
-            PacientName = object.getString("0");
-            PacientPathronymic = object.getString("1");
-            PacientLastName = object.getString("2");
-            CabinetNumber = object.getString("3");
-            ServiceCost = object.getString("4");
-            ServieName = object.getString("5");
-            Time = object.getString("6");
-            Date = object.getString("7");
+            SA.PacientName = object.getString("0");
+            SA.PacientPathronymic = object.getString("1");
+            SA.PacientLastName = object.getString("2");
+            SA.CabinetNumber = object.getString("3");
+            SA.ServiceCost = object.getString("4");
+            SA.ServieName = object.getString("5");
+            SA.Time = object.getString("6");
+            SA.Date = object.getString("7");
         } catch(Exception e){
             e.printStackTrace();
         }
