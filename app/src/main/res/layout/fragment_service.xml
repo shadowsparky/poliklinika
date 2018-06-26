@@ -5,7 +5,11 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
     tools:context=".ServiceFragment">
-
+    <fragment
+        android:id="@+id/UserAppointmentsList"
+        android:name="ru.shadowsparky.autisticsdevelopers.poliklinika.ServicesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/isServicesEmpty"
         android:layout_width="match_parent"

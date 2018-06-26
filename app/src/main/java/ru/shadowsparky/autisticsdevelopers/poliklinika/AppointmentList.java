@@ -86,37 +86,37 @@ public class AppointmentList extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Toast.makeText(getActivity(), "Clicked - " + position, Toast.LENGTH_SHORT).show();
-//        String[] bindValues = {"Key", "AppointmentNumber"};
-//        String[] values = {"EnableExecute", ids[position]};
-//        getAppointmentInfo(position, bindValues, values);
+        String[] bindValues = {"Key", "AppointmentNumber"};
+        String[] values = {"EnableExecute", ids[position]};
+        getAppointmentInfo(position, bindValues, values);
     }
 
     private void getAppointmentInfo(int position, String[] bindValues, String[] values) {
-//        SQL_GetAdditionalAppointmentInfo SGAAI = new SQL_GetAdditionalAppointmentInfo(bindValues, values, "https://autisticapi.shadowsparky.ru/getAdditionalAppointmentInfo.php");
-//        ArrayList<SQL_Engine> res = SGAAI.CatchResult();
-//        if (res != null) {
-//            if (res.size() != 0) {
-//                String [] TMPResultArray = {((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientLastName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientPathronymic(),
-//                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorLastName() + " " +
-//                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorPathronymic(),
-//                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPosition(),
-//                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDate(),
-//                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getTime(),
-//                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getCabinetNumber()
-//                };
-//                Intent i = new Intent(getActivity(), DeployedAppointmentActivity.class);
-//                String[] valuesIntent = {"PacientInfo", "DoctorInfo", "Position", "Date", "Time", "CabinetNumber"};
-//                putin(i, valuesIntent, TMPResultArray);
-//                i.putExtra("AppointmentNumber", ids[position]);
-//                startActivity(i);
-//            } else {
-//                Toast.makeText(getActivity(), "Запись не найдена", Toast.LENGTH_SHORT).show();}
-//        } else {Toast.makeText(getActivity(), getResources().getString(R.string.connection_error), Toast.LENGTH_SHORT).show();}
+        SQL_GetAdditionalAppointmentInfo SGAAI = new SQL_GetAdditionalAppointmentInfo(bindValues, values, "https://autisticapi.shadowsparky.ru/getAdditionalAppointmentInfo.php");
+        ArrayList<SQL_Engine> res = SGAAI.CatchResult();
+        if (res != null) {
+            if (res.size() != 0) {
+                String [] TMPResultArray = {((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientLastName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientPathronymic(),
+                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorLastName() + " " +
+                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorPathronymic(),
+                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPosition(),
+                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDate(),
+                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getTime(),
+                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getCabinetNumber()
+                };
+                Intent i = new Intent(getActivity(), DeployedAppointmentActivity.class);
+                String[] valuesIntent = {"PacientInfo", "DoctorInfo", "Position", "Date", "Time", "CabinetNumber"};
+                putin(i, valuesIntent, TMPResultArray);
+                i.putExtra("AppointmentNumber", ids[position]);
+                startActivity(i);
+            } else {
+                Toast.makeText(getActivity(), "Запись не найдена", Toast.LENGTH_SHORT).show();}
+        } else {Toast.makeText(getActivity(), getResources().getString(R.string.connection_error), Toast.LENGTH_SHORT).show();}
     }
 
-//    private void putin(Intent i, String[] values, String...args){
-//        for (int j = 0; j < args.length; j++){
-//            i.putExtra(values[j], args[j]);
-//        }
-//    }
+    private void putin(Intent i, String[] values, String...args){
+        for (int j = 0; j < args.length; j++){
+            i.putExtra(values[j], args[j]);
+        }
+    }
 }

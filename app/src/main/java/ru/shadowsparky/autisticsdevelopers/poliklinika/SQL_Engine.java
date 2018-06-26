@@ -325,7 +325,7 @@ class SQL_AddAppointment extends SQL_Engine implements ISQL {
     }
 }
 class SQL_GetUserAppointments extends SQL_Engine implements ISQL {
-    private String AppointmentNumber;
+    private String AppointmentNubmer;
     private String Time;
     private String Date;
     private String Position;
@@ -333,7 +333,7 @@ class SQL_GetUserAppointments extends SQL_Engine implements ISQL {
         super(bindValues, values, url);
     }
 
-    public String getAppointmentNumber(){return AppointmentNumber;}
+    public String getAppointmentNumber(){return AppointmentNubmer;}
     public String getTime(){return Time;}
     public String getDate(){return Date;}
     public String getPosition(){return Position;}
@@ -341,7 +341,7 @@ class SQL_GetUserAppointments extends SQL_Engine implements ISQL {
     public SQL_Engine parseJson(JSONObject object) {
         SQL_GetUserAppointments SA = new SQL_GetUserAppointments(null, null, null);
         try {
-            SA.AppointmentNumber= object.getString("Appointment_Number");
+            SA.AppointmentNubmer = object.getString("Appointment_Number");
             SA.Time = object.getString("Time");
             SA.Date = object.getString("Date");
             SA.Position = object.getString("Position");
@@ -555,11 +555,15 @@ class SQL_GetAllUserServices extends SQL_Engine implements ISQL {
     public String getService_Appointment_Time() {
         return Service_Appointment_Time;
     }
+    public String getService_ID() {
+        return Service_ID;
+    }
 
     private String Service_Name;
     private String Service_Appointment_Date;
     private String Service_Appointment_Time;
     private String Pacient_Policy_Number;
+    private String Service_ID;
 
 
 
@@ -567,10 +571,11 @@ class SQL_GetAllUserServices extends SQL_Engine implements ISQL {
     public SQL_Engine parseJson(JSONObject object) {
         SQL_GetAllUserServices SA = new SQL_GetAllUserServices(null, null, null);
         try {
-            SA.Pacient_Policy_Number = object.getString("Pacient_Policy_Number");
+            SA.Service_ID = object.getString("Appointment_ID");
+            SA.Pacient_Policy_Number = object.getString("Policy_Number");
             SA.Service_Name = object.getString("Service_Name");
-            SA.Service_Appointment_Date = object.getString("Service_Appointment_Date");
-            SA.Service_Appointment_Time = object.getString("Service_Appointment_Time");
+            SA.Service_Appointment_Date = object.getString("Date");
+            SA.Service_Appointment_Time = object.getString("Time");
         } catch(Exception e){
             e.printStackTrace();
         }

@@ -43,10 +43,10 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
                     FragmentTransaction ftrans = getFragmentManager().beginTransaction();
                     if (id == R.id.myAppointments){
                         ftrans.replace(R.id.container, _appointmentFrag);
-                        Toast.makeText(getBaseContext(), "Appointments click", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getBaseContext(), "Appointments click", Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.myServices){
                         ftrans.replace(R.id.container, _serviceFrag);
-                        Toast.makeText(getBaseContext(), "Services click", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getBaseContext(), "Services click", Toast.LENGTH_SHORT).show();
                     } ftrans.commit();
 
                     menuItem.setChecked(true);

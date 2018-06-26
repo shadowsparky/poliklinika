@@ -35,24 +35,24 @@ public class ServicesList extends ListFragment {
     private ArrayList<HashMap<String, String>> throwListResult(){
         ArrayList<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 
-//        tv = (TextView) getActivity().findViewById(R.id.isEmptyTV);
-//        String [] bindValues = {"Key", "Login"};
-//        String [] values = {"EnableExecute", Auth_Menu.getLogin()};
-//        if (getAppointmentList(result, bindValues, values)) return null;
+        tv = (TextView) getActivity().findViewById(R.id.isServicesEmpty);
+        String [] bindValues = {"Key", "Login"};
+        String [] values = {"EnableExecute", Auth_Menu.getLogin()};
+        if (getServicesList(result, bindValues, values)) return null;
         return result;
     }
 
     private boolean getServicesList(ArrayList<HashMap<String, String>> result, String[] bindValues, String[] values) {
-        SQL_GetUserAppointments SG = new SQL_GetUserAppointments(bindValues, values, "https://autisticapi.shadowsparky.ru/getalluserappointments.php");
+        SQL_GetAllUserServices SG = new SQL_GetAllUserServices(bindValues, values, "https://autisticapi.shadowsparky.ru/getAllUserServices.php");
         SG.set_context(getActivity());
         ArrayList<SQL_Engine> res = SG.CatchResult();
         ids = new String[res.size()];
-        if (!((SQL_GetUserAppointments)res.get(0)).getAppointmentNumber().equals("Записи отсутствуют")) {
+        if (!((SQL_GetAllUserServices)res.get(0)).getService_Name().equals("Записи отсутствуют")) {
             for (int i = 0; i < res.size(); i++) {
-                ids[i] = ((SQL_GetUserAppointments) res.get(i)).getAppointmentNumber();
+                ids[i] = ((SQL_GetAllUserServices) res.get(i)).getService_ID();
                 HashMap<String, String> TMPResult = new HashMap<String, String>();
-                TMPResult.put("Specialization",((SQL_GetUserAppointments) res.get(i)).getPosition());
-                TMPResult.put("Date and Time", ( "Время: "+((SQL_GetUserAppointments) res.get(i)).getTime() + ", дата: " + ((SQL_GetUserAppointments) res.get(i)).getDate()));
+                TMPResult.put("Specialization",((SQL_GetAllUserServices) res.get(i)).getService_Name());
+                TMPResult.put("Date and Time", ( "Время: "+((SQL_GetAllUserServices) res.get(i)).getService_Appointment_Time() + ", дата: " + ((SQL_GetAllUserServices) res.get(i)).getService_Appointment_Date()));
                 result.add(TMPResult);
             }
             tv.setVisibility(View.INVISIBLE);
