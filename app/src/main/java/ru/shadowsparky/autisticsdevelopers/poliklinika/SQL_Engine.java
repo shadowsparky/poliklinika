@@ -571,11 +571,87 @@ class SQL_GetAllUserServices extends SQL_Engine implements ISQL {
     public SQL_Engine parseJson(JSONObject object) {
         SQL_GetAllUserServices SA = new SQL_GetAllUserServices(null, null, null);
         try {
-            SA.Service_ID = object.getString("Appointment_ID");
-            SA.Pacient_Policy_Number = object.getString("Policy_Number");
-            SA.Service_Name = object.getString("Service_Name");
-            SA.Service_Appointment_Date = object.getString("Date");
-            SA.Service_Appointment_Time = object.getString("Time");
+            SA.Pacient_Policy_Number = object.getString("0");
+            SA.Service_ID = object.getString("1");
+            SA.Service_Name = object.getString("2");
+            SA.Service_Appointment_Date = object.getString("3");
+            SA.Service_Appointment_Time = object.getString("4");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult(){
+        return super.CatchResult();
+    }
+}
+
+class SQL_GetAdditionalServiceInfo extends SQL_Engine implements ISQL {
+    public SQL_GetAdditionalServiceInfo (String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+
+    private String PacientName;
+    private String PacientLastName;
+    private String PacientPathronymic;
+    private String CabinetNumber;
+    private String ServiceCost;
+    private String ServieName;
+    private String Time;
+    private String Date;
+
+    public String getPacientName() {
+        return PacientName;
+    }
+
+    public String getPacientLastName() {
+        return PacientLastName;
+    }
+
+    public String getPacientPathronymic() {
+        return PacientPathronymic;
+    }
+
+    public String getCabinetNumber() {
+        return CabinetNumber;
+    }
+
+    public String getServiceCost() {
+        return ServiceCost;
+    }
+
+    public String getServieName() {
+        return ServieName;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+
+
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_GetAdditionalServiceInfo  SA = new SQL_GetAdditionalServiceInfo (null, null, null);
+        try {
+
         } catch(Exception e){
             e.printStackTrace();
         }

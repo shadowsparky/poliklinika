@@ -47,7 +47,7 @@ public class ServicesList extends ListFragment {
         SG.set_context(getActivity());
         ArrayList<SQL_Engine> res = SG.CatchResult();
         ids = new String[res.size()];
-        if (!((SQL_GetAllUserServices)res.get(0)).getService_Name().equals("Записи отсутствуют")) {
+        if (!((SQL_GetAllUserServices)res.get(0)).getPacient_Policy_Number().equals("Записи отсутствуют")) {
             for (int i = 0; i < res.size(); i++) {
                 ids[i] = ((SQL_GetAllUserServices) res.get(i)).getService_ID();
                 HashMap<String, String> TMPResult = new HashMap<String, String>();
