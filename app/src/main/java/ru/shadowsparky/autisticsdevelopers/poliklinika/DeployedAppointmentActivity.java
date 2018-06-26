@@ -11,6 +11,7 @@ package ru.shadowsparky.autisticsdevelopers.poliklinika;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,6 @@ public class DeployedAppointmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deployed_appointment);
-        getSupportActionBar().setTitle("Подробная информация о записи");
         _AppointmentView = (TextView) findViewById(R.id.AppointmentNumber);
         _PacientView = (TextView)findViewById(R.id.PacientView);
         _DoctorView = (TextView)findViewById(R.id.DoctorView);
@@ -48,6 +48,9 @@ public class DeployedAppointmentActivity extends AppCompatActivity {
         _TimeView.setText(_TimeView.getText() + myIntent.getStringExtra("Time"));
         _CabinetView.setText(_CabinetView.getText() + myIntent.getStringExtra("CabinetNumber"));
         AppointmentNumber = myIntent.getStringExtra("AppointmentNumber");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Подробная информация");
+        setSupportActionBar(toolbar);
     }
     public void onDeleteAppointmentButtonClick(View view){
         String[] bindValues = {"Key", "Appointment_Number"};

@@ -4,12 +4,7 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -17,9 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class AppointmentList extends ListFragment {
+public class ServicesList extends ListFragment {
     private String [] ids = null;
     TextView tv = null;
     @Override
@@ -41,14 +35,14 @@ public class AppointmentList extends ListFragment {
     private ArrayList<HashMap<String, String>> throwListResult(){
         ArrayList<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 
-        tv = (TextView) getActivity().findViewById(R.id.isEmptyTV);
-        String [] bindValues = {"Key", "Login"};
-        String [] values = {"EnableExecute", Auth_Menu.getLogin()};
-        if (getAppointmentList(result, bindValues, values)) return null;
+//        tv = (TextView) getActivity().findViewById(R.id.isEmptyTV);
+//        String [] bindValues = {"Key", "Login"};
+//        String [] values = {"EnableExecute", Auth_Menu.getLogin()};
+//        if (getAppointmentList(result, bindValues, values)) return null;
         return result;
     }
 
-    private boolean getAppointmentList(ArrayList<HashMap<String, String>> result, String[] bindValues, String[] values) {
+    private boolean getServicesList(ArrayList<HashMap<String, String>> result, String[] bindValues, String[] values) {
         SQL_GetUserAppointments SG = new SQL_GetUserAppointments(bindValues, values, "https://autisticapi.shadowsparky.ru/getalluserappointments.php");
         SG.set_context(getActivity());
         ArrayList<SQL_Engine> res = SG.CatchResult();
@@ -85,20 +79,19 @@ public class AppointmentList extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Toast.makeText(getActivity(), "Clicked - " + position, Toast.LENGTH_SHORT).show();
-//        String[] bindValues = {"Key", "AppointmentNumber"};
-//        String[] values = {"EnableExecute", ids[position]};
+        String[] bindValues = {"Key", "AppointmentNumber"};
+        String[] values = {"EnableExecute", ids[position]};
 //        getAppointmentInfo(position, bindValues, values);
     }
 
-    private void getAppointmentInfo(int position, String[] bindValues, String[] values) {
+//    private void getAppointmentInfo(int position, String[] bindValues, String[] values) {
 //        SQL_GetAdditionalAppointmentInfo SGAAI = new SQL_GetAdditionalAppointmentInfo(bindValues, values, "https://autisticapi.shadowsparky.ru/getAdditionalAppointmentInfo.php");
 //        ArrayList<SQL_Engine> res = SGAAI.CatchResult();
 //        if (res != null) {
 //            if (res.size() != 0) {
 //                String [] TMPResultArray = {((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientLastName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPacientPathronymic(),
 //                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorFirstName() + " " + ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorLastName() + " " +
-//                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorPathronymic(),
+//                                ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDoctorPathronymic(),
 //                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getPosition(),
 //                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getDate(),
 //                        ((SQL_GetAdditionalAppointmentInfo) res.get(0)).getTime(),
@@ -112,8 +105,8 @@ public class AppointmentList extends ListFragment {
 //            } else {
 //                Toast.makeText(getActivity(), "Запись не найдена", Toast.LENGTH_SHORT).show();}
 //        } else {Toast.makeText(getActivity(), getResources().getString(R.string.connection_error), Toast.LENGTH_SHORT).show();}
-    }
-
+//    }
+//
 //    private void putin(Intent i, String[] values, String...args){
 //        for (int j = 0; j < args.length; j++){
 //            i.putExtra(values[j], args[j]);

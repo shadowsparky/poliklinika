@@ -534,3 +534,62 @@ class SQL_CreateUser extends SQL_Engine implements ISQL {
         return super.CatchResult();
     }
 }
+
+class SQL_GetAllUserServices extends SQL_Engine implements ISQL {
+    public SQL_GetAllUserServices (String[] bindValues, String[] values, String url) {
+        super(bindValues, values, url);
+    }
+
+    public String getPacient_Policy_Number() {
+        return Pacient_Policy_Number;
+    }
+
+    public String getService_Name() {
+        return Service_Name;
+    }
+
+    public String getService_Appointment_Date() {
+        return Service_Appointment_Date;
+    }
+
+    public String getService_Appointment_Time() {
+        return Service_Appointment_Time;
+    }
+
+    private String Service_Name;
+    private String Service_Appointment_Date;
+    private String Service_Appointment_Time;
+    private String Pacient_Policy_Number;
+
+
+
+    @Override
+    public SQL_Engine parseJson(JSONObject object) {
+        SQL_GetAllUserServices SA = new SQL_GetAllUserServices(null, null, null);
+        try {
+            SA.Pacient_Policy_Number = object.getString("Pacient_Policy_Number");
+            SA.Service_Name = object.getString("Service_Name");
+            SA.Service_Appointment_Date = object.getString("Service_Appointment_Date");
+            SA.Service_Appointment_Time = object.getString("Service_Appointment_Time");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return SA;
+    }
+    @Override
+    public boolean HandleResult(SQL_Engine se) {
+        return false;
+    }
+    @Override
+    public ArrayList<SQL_Engine> fromJson(JSONArray array) {
+        return super.fromJson(array);
+    }
+    @Override
+    public Response Post() {
+        return super.Post();
+    }
+    @Override
+    public ArrayList<SQL_Engine> CatchResult(){
+        return super.CatchResult();
+    }
+}

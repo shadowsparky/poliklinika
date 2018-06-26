@@ -29,33 +29,32 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        getSupportActionBar().setTitle(R.string.My_Appointments);
         mDrawerLayout = findViewById(R.id.drawer_layout);
+        setTitle("Мои Записи");
         FragmentTransaction ftrans = getFragmentManager().beginTransaction();
         ftrans.replace(R.id.container, _appointmentFrag).commit();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+            new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                        int id = menuItem.getItemId();
-                        FragmentTransaction ftrans = getFragmentManager().beginTransaction();
-                        if (id == R.id.myAppointments){
-                            ftrans.replace(R.id.container, _appointmentFrag);
+                    int id = menuItem.getItemId();
+                    FragmentTransaction ftrans = getFragmentManager().beginTransaction();
+                    if (id == R.id.myAppointments){
+                        ftrans.replace(R.id.container, _appointmentFrag);
+                        Toast.makeText(getBaseContext(), "Appointments click", Toast.LENGTH_SHORT).show();
+                    } else if (id == R.id.myServices){
+                        ftrans.replace(R.id.container, _serviceFrag);
+                        Toast.makeText(getBaseContext(), "Services click", Toast.LENGTH_SHORT).show();
+                    } ftrans.commit();
 
-                            Toast.makeText(getBaseContext(), "Appointments click", Toast.LENGTH_SHORT).show();
-                        } else if (id == R.id.myServices){
-                            ftrans.replace(R.id.container, _serviceFrag);
-                            Toast.makeText(getBaseContext(), "Services click", Toast.LENGTH_SHORT).show();
-                        } ftrans.commit();
+                    menuItem.setChecked(true);
+                    mDrawerLayout.closeDrawers();
 
-                        menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-
-                        return true;
-                    }
-                });
+                    return true;
+                }
+            });
         navigationView.setCheckedItem(R.id.myAppointments);
     }
 
