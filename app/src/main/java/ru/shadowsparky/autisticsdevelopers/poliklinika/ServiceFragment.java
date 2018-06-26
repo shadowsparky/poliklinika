@@ -3,6 +3,8 @@ package ru.shadowsparky.autisticsdevelopers.poliklinika;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import android.view.ViewGroup;
  * Use the {@link ServiceFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ServiceFragment extends Fragment {
+public class ServiceFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,8 +65,11 @@ public class ServiceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_service, container, false);
-    }
+        FloatingActionButton fab = getActivity().findViewById(R.id.fabService);
+        View view = inflater.inflate(R.layout.fragment_service, container, false);
+        fab = view.findViewById(R.id.fabService);
+        fab.setOnClickListener(this);
+        return view;    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -88,6 +93,16 @@ public class ServiceFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.fabService:
+                Snackbar.make(v, "К сожалению, на данный момент запись на услугу недоступна", Snackbar.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     /**
