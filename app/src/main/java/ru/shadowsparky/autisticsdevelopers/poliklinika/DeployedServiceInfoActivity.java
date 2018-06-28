@@ -7,6 +7,7 @@ package ru.shadowsparky.autisticsdevelopers.poliklinika;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 public class DeployedServiceInfoActivity extends AppCompatActivity {
@@ -34,7 +35,10 @@ public class DeployedServiceInfoActivity extends AppCompatActivity {
         _cabinetView.setText(_cabinetView.getText() + myIntent.getStringExtra("CabinetInfo"));
         _costView.setText(_costView.getText() + myIntent.getStringExtra("CostInfo"));
         _serviceView.setText(_serviceView.getText() + myIntent.getStringExtra("ServiceInfo"));
-        _timeView.setText(_serviceView.getText() + myIntent.getStringExtra("Time"));
+        _timeView.setText(_timeView.getText() + myIntent.getStringExtra("Time"));
         _dateView.setText(_dateView.getText() + myIntent.getStringExtra("Date"));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Подробная информация");
+        setSupportActionBar(toolbar);
     }
 }

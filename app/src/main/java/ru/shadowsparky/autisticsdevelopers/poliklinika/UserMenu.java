@@ -40,9 +40,16 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
                 public boolean onNavigationItemSelected(MenuItem menuItem) {
 
                     int id = menuItem.getItemId();
-                    FragmentTransaction ftrans = getFragmentManager().beginTransaction();
+                    final FragmentTransaction ftrans = getFragmentManager().beginTransaction();
                     if (id == R.id.myAppointments){
-                        ftrans.replace(R.id.container, _appointmentFrag);
+                        Thread t = new Thread(){
+                            @Override
+                            public void run() {
+                                super.run();
+                                ftrans.replace(R.id.container, _appointmentFrag);
+                            }
+                        };
+                        t.start();
 //                        Toast.makeText(getBaseContext(), "Appointments click", Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.myServices){
                         ftrans.replace(R.id.container, _serviceFrag);

@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,10 +27,11 @@ public class AppointmentList extends ListFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+//        Loading();
         setAppointments();
+//            Loaded();
     }
-
-    private void setAppointments() {
+    private boolean setAppointments() {
         ArrayList<HashMap<String, String>> data = throwListResult();
         if (data != null) {
             SimpleAdapter adapter = new SimpleAdapter(getActivity(), data, android.R.layout.simple_list_item_2,
@@ -36,6 +39,7 @@ public class AppointmentList extends ListFragment {
                     new int[]{android.R.id.text1, android.R.id.text2});
             setListAdapter(adapter);
         }
+        return true;
     }
 
     private ArrayList<HashMap<String, String>> throwListResult(){
@@ -85,7 +89,7 @@ public class AppointmentList extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Toast.makeText(getActivity(), "Clicked - " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Clicked - " + position, Toast.LENGTH_SHORT).show();
         String[] bindValues = {"Key", "AppointmentNumber"};
         String[] values = {"EnableExecute", ids[position]};
         getAppointmentInfo(position, bindValues, values);
