@@ -1,5 +1,12 @@
 package ru.shadowsparky.autisticsdevelopers.poliklinika;
 
+/*
+* govnokod
+*
+*
+* (c) Samsonov_Eugene, 2018.
+*
+* */
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +24,6 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_user_menu);
         getSupportActionBar().setTitle(R.string.My_Appointments);
     }
-    // test
 
     @Override
     public void onClick(View v) {
