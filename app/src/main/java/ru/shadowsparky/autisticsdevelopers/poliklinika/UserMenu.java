@@ -17,6 +17,7 @@ public class UserMenu extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_user_menu);
         getSupportActionBar().setTitle(R.string.My_Appointments);
     }
+    // test
 
     @Override
     public void onClick(View v) {
